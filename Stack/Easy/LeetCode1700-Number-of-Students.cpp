@@ -1,5 +1,5 @@
-// LeetCode 1700. Number of Students Unable to Eat Lunch
-/*
+/* 
+LeetCode 1700. Number of Students Unable to Eat Lunch
 Approach:
 To solve the problem, we simulate the process of serving sandwiches to students. We maintain two data structures: a stack for sandwiches and a queue for students.
 
