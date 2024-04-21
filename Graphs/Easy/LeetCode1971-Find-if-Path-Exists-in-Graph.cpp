@@ -55,3 +55,56 @@ public:
         return checkforpath(mp, source, destination, visited);
     }
 };
+
+
+
+//This problem can be approached using BFS also.
+
+class Solution {
+public:
+    // Function to validate if there exists a path from source to destination in the graph
+    bool validPath(int n, vector<vector<int>>& edges, int s, int d) {
+        // Create adjacency list representation of the graph
+        unordered_map<int, vector<int>> mp;
+        for (vector<int> &edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            mp[u].push_back(v); // Add edge from u to v
+            mp[v].push_back(u); // Add edge from v to u (undirected graph)
+        }
+        
+        // Initialize visited array to keep track of visited nodes
+        vector<bool> visited(n, false);
+        
+        // Create a queue for BFS traversal
+        queue<int> que;
+        
+        // Push the source node into the queue and mark it as visited
+        que.push(s);
+        visited[s] = true;
+        
+        // Perform BFS traversal
+        while (!que.empty()) {
+            int node = que.front(); // Get the front node from the queue
+            que.pop(); // Remove the front node from the queue
+            
+            // If the current node is the destination node, return true
+            if (node == d) {
+                return true;
+            }
+            
+            // Explore all neighbors of the current node
+            for (int &v : mp[node]) {
+                // If the neighbor has not been visited, push it into the queue and mark it as visited
+                if (!visited[v]) {
+                    que.push(v);
+                    visited[v] = true;
+                }
+            }
+        }
+        
+        // If destination node is not reached after BFS traversal, return false
+        return false;
+    }
+};
+
